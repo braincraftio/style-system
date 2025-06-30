@@ -29,17 +29,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            index.html
-            *.css
-            *.js
-            *.ico
-            *.png
-            *.svg
-            assets
-            images
-            fonts
 
       - name: Validate index.html exists
         run: |
