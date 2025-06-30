@@ -1,0 +1,62 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    # NOTE: VS Code GitHub Actions extension incorrectly flags 'github-pages' as invalid
+    # This is a known false positive (github/vscode-github-actions#215)
+    # The 'github-pages' environment name is correct and will be auto-created by GitHub
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            index.html
+            *.css
+            *.js
+            *.ico
+            *.png
+            *.svg
+            assets
+            images
+            fonts
+
+      - name: Validate index.html exists
+        run: |
+          if [[ ! -f "index.html" ]]; then
+            echo "::error::index.html not found in repository root"
+            exit 1
+          fi
+          echo "✅ index.html found ($(stat -c%s index.html 2>/dev/null || stat -f%z index.html) bytes)"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

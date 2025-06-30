@@ -1,0 +1,3149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Design System | Where Enterprise Meets Whimsy</title>
+    <meta name="description" content="A modern design system that brings joy to enterprise software through thoughtful color, subtle animation, and accessible components">
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Modern Variable Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           AURORA DESIGN SYSTEM - ENTERPRISE WHIMSY EDITION
+           Version 3.0.0 | Modern CSS Architecture
+           ═══════════════════════════════════════════════════════════════ */
+
+        /* ─────────────────────────────────────────────────────────────
+           CASCADE LAYERS - Modern CSS Organization
+           ───────────────────────────────────────────────────────────── */
+        @layer reset, tokens, theme, base, layout, components, utilities, overrides;
+
+        /* ─────────────────────────────────────────────────────────────
+           RESET LAYER - Normalize Browser Defaults
+           ───────────────────────────────────────────────────────────── */
+        @layer reset {
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+            }
+
+            html {
+                font-size: 16px;
+                -webkit-text-size-adjust: 100%;
+                text-size-adjust: 100%;
+                line-height: 1.5;
+                -moz-tab-size: 4;
+                tab-size: 4;
+                scroll-behavior: smooth;
+
+                /* Modern text rendering */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+
+            body {
+                min-height: 100vh;
+                font-family: var(--font-sans);
+                color: var(--color-text-primary);
+                background-color: var(--color-surface-base);
+            }
+
+            /* Accessible focus defaults */
+            :focus-visible {
+                outline: 2px solid var(--color-focus);
+                outline-offset: 2px;
+            }
+
+            /* Remove focus for mouse users */
+            :focus:not(:focus-visible) {
+                outline: none;
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           DESIGN TOKENS LAYER - Core System Values
+           ───────────────────────────────────────────────────────────── */
+        @layer tokens {
+            :root {
+                /* ═══════════════════════════════════════════════════════
+                   COLOR SYSTEM - Cream/Slate with Whimsical Accents
+                   ═══════════════════════════════════════════════════════ */
+
+                /* Base Neutrals - Warm Cream to Cool Slate (with fallbacks) */
+                --cream-50: #FDFCFB;
+                --cream-50: oklch(98% 0.01 85);
+                --cream-100: #FAF9F7;
+                --cream-100: oklch(97% 0.015 85);
+                --cream-200: #F5F3F0;
+                --cream-200: oklch(95% 0.02 85);
+                --cream-300: #EBE7E2;
+                --cream-300: oklch(92% 0.025 85);
+                --cream-400: #DDD7CE;
+                --cream-400: oklch(88% 0.03 85);
+
+                --slate-50: #FAF9FC;
+                --slate-50: oklch(98% 0.015 295);
+                --slate-100: #F5F3F9;
+                --slate-100: oklch(96% 0.020 295);
+                --slate-200: #EAE7F0;
+                --slate-200: oklch(92% 0.028 295);
+                --slate-300: #D8D3E1;
+                --slate-300: oklch(84% 0.035 295);
+                --slate-400: #AFA8BD;
+                --slate-400: oklch(71% 0.045 295);
+                --slate-500: #837A91;
+                --slate-500: oklch(55% 0.055 295);
+                --slate-600: #615870;
+                --slate-600: oklch(43% 0.065 295);
+                --slate-700: #49425A;
+                --slate-700: oklch(33% 0.075 295);
+                --slate-800: #322C42;
+                --slate-800: oklch(25% 0.080 295);
+                --slate-900: #1F1A2E;
+                --slate-900: oklch(18% 0.085 295);
+
+                /* Whimsical Accent Colors - Muted Pastels (with fallbacks) */
+                --lavender-300: #D8C9E8;
+                --lavender-300: oklch(85% 0.08 300);
+                --lavender-400: #C0A6DB;
+                --lavender-400: oklch(78% 0.12 300);
+                --lavender-500: #A483CE;
+                --lavender-500: oklch(70% 0.16 300);
+
+                --mint-300: #C3E9D7;
+                --mint-300: oklch(87% 0.08 160);
+                --mint-400: #A5D5C1;
+                --mint-400: oklch(80% 0.12 160);
+                --mint-500: #87C1AB;
+                --mint-500: oklch(72% 0.16 160);
+
+                --peach-300: #FFD9C7;
+                --peach-300: oklch(88% 0.08 60);
+                --peach-400: #FFC4A8;
+                --peach-400: oklch(82% 0.12 60);
+                --peach-500: #FFAF89;
+                --peach-500: oklch(75% 0.16 60);
+
+                --sky-300: #C3E4F7;
+                --sky-300: oklch(88% 0.08 220);
+                --sky-400: #A3D4F3;
+                --sky-400: oklch(82% 0.12 220);
+                --sky-500: #83C4EF;
+                --sky-500: oklch(75% 0.16 220);
+
+                /* Semantic Colors - Enterprise Ready (with fallbacks) */
+                --success-light: #C6F6D5;
+                --success-light: oklch(92% 0.12 145);
+                --success-base: #68D391;
+                --success-base: oklch(72% 0.19 145);
+                --success-dark: #38A169;
+                --success-dark: oklch(55% 0.19 145);
+
+                --warning-light: #FEFCBF;
+                --warning-light: oklch(92% 0.12 85);
+                --warning-base: #F6E05E;
+                --warning-base: oklch(78% 0.17 85);
+                --warning-dark: #D69E2E;
+                --warning-dark: oklch(62% 0.17 85);
+
+                --danger-light: #FED7D7;
+                --danger-light: oklch(92% 0.12 25);
+                --danger-base: #F56565;
+                --danger-base: oklch(68% 0.19 25);
+                --danger-dark: #C53030;
+                --danger-dark: oklch(52% 0.19 25);
+
+                --info-light: #BEE3F8;
+                --info-light: oklch(92% 0.12 240);
+                --info-base: #4299E1;
+                --info-base: oklch(72% 0.17 240);
+                --info-dark: #2B6CB0;
+                --info-dark: oklch(55% 0.17 240);
+
+                /* ═══════════════════════════════════════════════════════
+                   TYPOGRAPHY SYSTEM - Clean & Readable
+                   ═══════════════════════════════════════════════════════ */
+
+                /* Font Families */
+                --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+                --font-mono: 'Space Mono', 'SF Mono', Consolas, monospace;
+
+                /* Fluid Type Scale - Utopia.fyi inspired */
+                --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+                --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+                --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+                --text-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+                --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+                --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+                --text-3xl: clamp(1.875rem, 1.65rem + 1.125vw, 2.25rem);
+                --text-4xl: clamp(2.25rem, 1.95rem + 1.5vw, 3rem);
+                --text-5xl: clamp(3rem, 2.5rem + 2.5vw, 4rem);
+
+                /* Font Weights */
+                --font-light: 300;
+                --font-regular: 400;
+                --font-medium: 500;
+                --font-semibold: 600;
+                --font-bold: 700;
+
+                /* Line Heights */
+                --leading-tight: 1.25;
+                --leading-snug: 1.375;
+                --leading-normal: 1.5;
+                --leading-relaxed: 1.625;
+                --leading-loose: 1.75;
+
+                /* Letter Spacing */
+                --tracking-tight: -0.025em;
+                --tracking-normal: 0;
+                --tracking-wide: 0.025em;
+                --tracking-wider: 0.05em;
+
+                /* ═══════════════════════════════════════════════════════
+                   SPACING SYSTEM - 8px Grid
+                   ═══════════════════════════════════════════════════════ */
+
+                --space-0: 0;
+                --space-px: 1px;
+                --space-0_5: 0.125rem;  /* 2px */
+                --space-1: 0.25rem;     /* 4px */
+                --space-1_5: 0.375rem;  /* 6px */
+                --space-2: 0.5rem;      /* 8px */
+                --space-2_5: 0.625rem;  /* 10px */
+                --space-3: 0.75rem;     /* 12px */
+                --space-3_5: 0.875rem;  /* 14px */
+                --space-4: 1rem;        /* 16px */
+                --space-5: 1.25rem;     /* 20px */
+                --space-6: 1.5rem;      /* 24px */
+                --space-7: 1.75rem;     /* 28px */
+                --space-8: 2rem;        /* 32px */
+                --space-9: 2.25rem;     /* 36px */
+                --space-10: 2.5rem;     /* 40px */
+                --space-12: 3rem;       /* 48px */
+                --space-14: 3.5rem;     /* 56px */
+                --space-16: 4rem;       /* 64px */
+                --space-20: 5rem;       /* 80px */
+                --space-24: 6rem;       /* 96px */
+                --space-28: 7rem;       /* 112px */
+                --space-32: 8rem;       /* 128px */
+
+                /* ═══════════════════════════════════════════════════════
+                   RADIUS SYSTEM - Soft & Friendly
+                   ═══════════════════════════════════════════════════════ */
+
+                --radius-none: 0;
+                --radius-sm: 0.25rem;   /* 4px */
+                --radius-md: 0.5rem;    /* 8px */
+                --radius-lg: 0.75rem;   /* 12px */
+                --radius-xl: 1rem;      /* 16px */
+                --radius-2xl: 1.5rem;   /* 24px */
+                --radius-3xl: 2rem;     /* 32px */
+                --radius-full: 9999px;
+
+                /* ═══════════════════════════════════════════════════════
+                   SHADOW SYSTEM - Paper-like Elevation
+                   ═══════════════════════════════════════════════════════ */
+
+                /* Ambient shadows for paper effect */
+                --shadow-xs:
+                    0 0 0 1px oklch(0% 0 0 / 0.04),
+                    0 1px 1px oklch(0% 0 0 / 0.04);
+
+                --shadow-sm:
+                    0 0 0 1px oklch(0% 0 0 / 0.03),
+                    0 1px 2px oklch(0% 0 0 / 0.04),
+                    0 2px 4px oklch(0% 0 0 / 0.02);
+
+                --shadow-md:
+                    0 0 0 1px oklch(0% 0 0 / 0.03),
+                    0 2px 4px -1px oklch(0% 0 0 / 0.06),
+                    0 4px 8px -2px oklch(0% 0 0 / 0.04),
+                    0 8px 16px -4px oklch(0% 0 0 / 0.02);
+
+                --shadow-lg:
+                    0 0 0 1px oklch(0% 0 0 / 0.03),
+                    0 4px 8px -2px oklch(0% 0 0 / 0.08),
+                    0 8px 16px -4px oklch(0% 0 0 / 0.06),
+                    0 16px 32px -8px oklch(0% 0 0 / 0.04);
+
+                --shadow-xl:
+                    0 0 0 1px oklch(0% 0 0 / 0.03),
+                    0 8px 16px -4px oklch(0% 0 0 / 0.10),
+                    0 16px 32px -8px oklch(0% 0 0 / 0.08),
+                    0 24px 48px -12px oklch(0% 0 0 / 0.06);
+
+                /* Colored shadows for whimsy */
+                --shadow-lavender:
+                    0 4px 16px -2px oklch(70% 0.16 300 / 0.15),
+                    0 8px 32px -4px oklch(70% 0.16 300 / 0.10);
+
+                --shadow-mint:
+                    0 4px 16px -2px oklch(72% 0.16 160 / 0.15),
+                    0 8px 32px -4px oklch(72% 0.16 160 / 0.10);
+
+                --shadow-peach:
+                    0 4px 16px -2px oklch(75% 0.16 60 / 0.15),
+                    0 8px 32px -4px oklch(75% 0.16 60 / 0.10);
+
+                /* ═══════════════════════════════════════════════════════
+                   MOTION SYSTEM - Delightful & Accessible
+                   ═══════════════════════════════════════════════════════ */
+
+                /* Durations */
+                --duration-instant: 100ms;
+                --duration-fast: 200ms;
+                --duration-normal: 300ms;
+                --duration-slow: 400ms;
+                --duration-slower: 600ms;
+
+                /* Spring-based easing for whimsy */
+                --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.05);
+                --ease-spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
+                --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+                /* Standard easing */
+                --ease-in: cubic-bezier(0.4, 0, 1, 1);
+                --ease-out: cubic-bezier(0, 0, 0.2, 1);
+                --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+                /* ═══════════════════════════════════════════════════════
+                   Z-INDEX SYSTEM - Layered Architecture
+                   ═══════════════════════════════════════════════════════ */
+
+                --z-base: 0;
+                --z-raised: 1;
+                --z-dropdown: 1000;
+                --z-sticky: 1100;
+                --z-fixed: 1200;
+                --z-modal-backdrop: 1300;
+                --z-modal: 1400;
+                --z-popover: 1500;
+                --z-tooltip: 1600;
+                --z-notification: 1700;
+
+                /* ═══════════════════════════════════════════════════════
+                   CONTAINER QUERIES - Component Responsive Design
+                   ═══════════════════════════════════════════════════════ */
+
+                --container-xs: 320px;
+                --container-sm: 640px;
+                --container-md: 768px;
+                --container-lg: 1024px;
+                --container-xl: 1280px;
+                --container-2xl: 1536px;
+
+                /* ═══════════════════════════════════════════════════════
+                   ANIMATION TOKENS - Micro-interactions
+                   ═══════════════════════════════════════════════════════ */
+
+                /* Transforms */
+                --scale-hover: 1.02;
+                --scale-active: 0.98;
+                --translate-hover: -2px;
+
+                /* Blur values */
+                --blur-sm: 4px;
+                --blur-md: 8px;
+                --blur-lg: 16px;
+                --blur-xl: 24px;
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           THEME LAYER - Light/Dark Mode Implementation
+           ───────────────────────────────────────────────────────────── */
+        @layer theme {
+            :root {
+                /* Light Theme (Default) */
+                --color-surface-base: var(--cream-100);
+                --color-surface-paper: white;
+                --color-surface-raised: white;
+                --color-surface-overlay: color-mix(in oklch, var(--cream-50) 95%, transparent);
+                --color-surface-subtle: var(--cream-200);
+
+                --color-text-primary: var(--slate-800);
+                --color-text-secondary: var(--slate-600);
+                --color-text-tertiary: var(--slate-500);
+                --color-text-disabled: var(--slate-400);
+                --color-text-inverse: white;
+
+                --color-border-subtle: color-mix(in oklch, var(--slate-200) 50%, var(--cream-300));
+                --color-border-default: color-mix(in oklch, var(--slate-300) 60%, var(--cream-300));
+                --color-border-strong: var(--slate-400);
+
+                --color-primary: var(--lavender-400);
+                --color-primary-hover: var(--lavender-500);
+                --color-primary-active: color-mix(in oklch, var(--lavender-500) 90%, black);
+
+                --color-secondary: var(--mint-400);
+                --color-secondary-hover: var(--mint-500);
+                --color-secondary-active: color-mix(in oklch, var(--mint-500) 90%, black);
+
+                --color-accent: var(--peach-400);
+                --color-accent-hover: var(--peach-500);
+                --color-accent-active: color-mix(in oklch, var(--peach-500) 90%, black);
+
+                --color-focus: var(--sky-400);
+                --color-focus-ring: color-mix(in oklch, var(--sky-400) 25%, transparent);
+
+                /* Semantic colors */
+                --color-success: var(--success-base);
+                --color-success-bg: color-mix(in oklch, var(--success-light) 30%, var(--cream-50));
+                --color-success-border: var(--success-light);
+
+                --color-warning: var(--warning-base);
+                --color-warning-bg: color-mix(in oklch, var(--warning-light) 30%, var(--cream-50));
+                --color-warning-border: var(--warning-light);
+
+                --color-danger: var(--danger-base);
+                --color-danger-bg: color-mix(in oklch, var(--danger-light) 30%, var(--cream-50));
+                --color-danger-border: var(--danger-light);
+
+                --color-info: var(--info-base);
+                --color-info-bg: color-mix(in oklch, var(--info-light) 30%, var(--cream-50));
+                --color-info-border: var(--info-light);
+
+                /* Shadow colors */
+                --shadow-color: 295deg 25% 20%;
+            }
+
+            /* Dark Theme */
+            [data-theme="dark"] {
+                --color-surface-base: color-mix(in oklch, var(--slate-900) 95%, var(--lavender-500) 5%);
+                --color-surface-paper: color-mix(in oklch, var(--slate-800) 90%, var(--lavender-400) 10%);
+                --color-surface-raised: color-mix(in oklch, var(--slate-800) 92%, var(--lavender-400) 8%);
+                --color-surface-overlay: color-mix(in oklch, var(--slate-800) 85%, transparent);
+                --color-surface-subtle: color-mix(in oklch, var(--slate-700) 88%, var(--lavender-400) 12%);
+
+                --color-text-primary: var(--cream-100);
+                --color-text-secondary: var(--cream-300);
+                --color-text-tertiary: var(--slate-400);
+                --color-text-disabled: var(--slate-500);
+                --color-text-inverse: var(--slate-900);
+
+                --color-border-subtle: color-mix(in oklch, var(--slate-700) 70%, transparent);
+                --color-border-default: var(--slate-700);
+                --color-border-strong: var(--slate-600);
+
+                --color-primary: var(--lavender-300);
+                --color-primary-hover: var(--lavender-400);
+                --color-primary-active: var(--lavender-500);
+
+                --color-secondary: var(--mint-300);
+                --color-secondary-hover: var(--mint-400);
+                --color-secondary-active: var(--mint-500);
+
+                --color-accent: var(--peach-300);
+                --color-accent-hover: var(--peach-400);
+                --color-accent-active: var(--peach-500);
+
+                --color-focus: var(--sky-300);
+                --color-focus-ring: color-mix(in oklch, var(--sky-300) 30%, transparent);
+
+                /* Semantic colors - adjusted for dark mode */
+                --color-success: var(--success-light);
+                --color-success-bg: color-mix(in oklch, var(--success-dark) 20%, var(--slate-800));
+                --color-success-border: var(--success-dark);
+
+                --color-warning: var(--warning-light);
+                --color-warning-bg: color-mix(in oklch, var(--warning-dark) 20%, var(--slate-800));
+                --color-warning-border: var(--warning-dark);
+
+                --color-danger: var(--danger-light);
+                --color-danger-bg: color-mix(in oklch, var(--danger-dark) 20%, var(--slate-800));
+                --color-danger-border: var(--danger-dark);
+
+                --color-info: var(--info-light);
+                --color-info-bg: color-mix(in oklch, var(--info-dark) 20%, var(--slate-800));
+                --color-info-border: var(--info-dark);
+
+                /* Shadow colors */
+                --shadow-color: 295deg 20% 5%;
+            }
+
+            /* High Contrast Mode Support */
+            @media (prefers-contrast: high) {
+                :root {
+                    --color-border-subtle: var(--color-border-default);
+                    --color-border-default: var(--color-border-strong);
+                    --color-text-tertiary: var(--color-text-secondary);
+                }
+            }
+
+            /* Forced Colors Mode (Windows High Contrast) */
+            @media (forced-colors: active) {
+                * {
+                    forced-color-adjust: none;
+                }
+
+                a,
+                button,
+                input,
+                select,
+                textarea {
+                    forced-color-adjust: auto;
+                }
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           BASE LAYER - Element Defaults
+           ───────────────────────────────────────────────────────────── */
+        @layer base {
+            /* Typography Defaults */
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: var(--font-semibold);
+                line-height: var(--leading-tight);
+                letter-spacing: var(--tracking-tight);
+                color: var(--color-text-primary);
+            }
+
+            h1 { font-size: var(--text-5xl); font-weight: var(--font-bold); }
+            h2 { font-size: var(--text-4xl); }
+            h3 { font-size: var(--text-3xl); }
+            h4 { font-size: var(--text-2xl); }
+            h5 { font-size: var(--text-xl); }
+            h6 { font-size: var(--text-lg); }
+
+            p {
+                line-height: var(--leading-relaxed);
+                color: var(--color-text-secondary);
+            }
+
+            a {
+                color: var(--color-primary);
+                text-decoration: none;
+                transition: color var(--duration-fast) var(--ease-out);
+            }
+
+            a:hover {
+                color: var(--color-primary-hover);
+                text-decoration: underline;
+            }
+
+            /* Code Styling */
+            code {
+                font-family: var(--font-mono);
+                font-size: 0.875em;
+                background: var(--color-surface-subtle);
+                padding: 0.125em 0.375em;
+                border-radius: var(--radius-sm);
+            }
+
+            pre {
+                font-family: var(--font-mono);
+                background: var(--color-surface-subtle);
+                padding: var(--space-4);
+                border-radius: var(--radius-lg);
+                overflow-x: auto;
+                line-height: var(--leading-normal);
+            }
+
+            pre code {
+                background: none;
+                padding: 0;
+            }
+
+            /* Selection Colors */
+            ::selection {
+                background: var(--color-primary);
+                color: var(--color-text-inverse);
+            }
+
+            /* Scrollbar Styling */
+            ::-webkit-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: var(--color-surface-subtle);
+                border-radius: var(--radius-full);
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: var(--color-border-strong);
+                border-radius: var(--radius-full);
+                border: 3px solid var(--color-surface-subtle);
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--color-text-tertiary);
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           LAYOUT LAYER - Container & Grid Systems
+           ───────────────────────────────────────────────────────────── */
+        @layer layout {
+            /* Container with responsive padding */
+            .container {
+                width: 100%;
+                margin-inline: auto;
+                padding-inline: var(--space-4);
+                max-width: var(--container-2xl);
+            }
+
+            @media (min-width: 640px) {
+                .container {
+                    padding-inline: var(--space-6);
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .container {
+                    padding-inline: var(--space-8);
+                }
+            }
+
+            /* Modern Grid System */
+            .grid {
+                display: grid;
+                gap: var(--space-4);
+                grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            }
+
+            /* Flex Utilities */
+            .flex {
+                display: flex;
+            }
+
+            .flex-col {
+                flex-direction: column;
+            }
+
+            .flex-wrap {
+                flex-wrap: wrap;
+            }
+
+            .items-center {
+                align-items: center;
+            }
+
+            .justify-center {
+                justify-content: center;
+            }
+
+            .justify-between {
+                justify-content: space-between;
+            }
+
+            .gap-2 { gap: var(--space-2); }
+            .gap-3 { gap: var(--space-3); }
+            .gap-4 { gap: var(--space-4); }
+            .gap-6 { gap: var(--space-6); }
+            .gap-8 { gap: var(--space-8); }
+
+            /* Stack Layout Pattern */
+            .stack {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-4);
+            }
+
+            .stack-sm { gap: var(--space-2); }
+            .stack-lg { gap: var(--space-6); }
+            .stack-xl { gap: var(--space-8); }
+
+            /* Cluster Layout Pattern */
+            .cluster {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--space-3);
+                align-items: center;
+            }
+
+            /* Center Layout Pattern */
+            .center {
+                display: grid;
+                place-items: center;
+                min-height: 100vh;
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           COMPONENTS LAYER - UI Components
+           ───────────────────────────────────────────────────────────── */
+        @layer components {
+            /* ═══════════════════════════════════════════════════════════
+               BUTTON COMPONENT - With Whimsical Interactions
+               ═══════════════════════════════════════════════════════════ */
+
+            .btn {
+                /* Base Styles */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: var(--space-2);
+                padding: var(--space-2_5) var(--space-5);
+                font-family: inherit;
+                font-size: var(--text-base);
+                font-weight: var(--font-medium);
+                line-height: 1;
+                text-decoration: none;
+                border-radius: var(--radius-lg);
+                cursor: pointer;
+                user-select: none;
+                white-space: nowrap;
+                border: none;
+                background: none;
+                min-width: fit-content;
+
+                /* Transitions */
+                transition: all var(--duration-fast) var(--ease-spring);
+                transform-origin: center;
+
+                /* Focus Styles */
+                position: relative;
+                isolation: isolate;
+            }
+
+            /* Focus Ring */
+            .btn::after {
+                content: '';
+                position: absolute;
+                inset: -3px;
+                border-radius: calc(var(--radius-lg) + 3px);
+                opacity: 0;
+                box-shadow: 0 0 0 3px var(--color-focus-ring);
+                transition: opacity var(--duration-fast) var(--ease-out);
+                pointer-events: none;
+            }
+
+            .btn:focus-visible {
+                outline: none;
+            }
+
+            .btn:focus-visible::after {
+                opacity: 1;
+            }
+
+            /* Hover State */
+            .btn:hover:not(:disabled) {
+                transform: translateY(var(--translate-hover)) scale(var(--scale-hover));
+            }
+
+            /* Active State */
+            .btn:active:not(:disabled) {
+                transform: scale(var(--scale-active));
+                transition-duration: var(--duration-instant);
+            }
+
+            /* Disabled State */
+            .btn:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+                transform: none !important;
+            }
+
+            /* Button Variants */
+            .btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--color-primary) 0%,
+                    color-mix(in oklch, var(--color-primary) 85%, var(--color-primary-hover)) 100%
+                );
+                color: white;
+                border: none;
+                box-shadow: var(--shadow-sm), var(--shadow-lavender);
+            }
+
+            .btn-primary:hover:not(:disabled) {
+                box-shadow: var(--shadow-md), var(--shadow-lavender);
+            }
+
+            .btn-secondary {
+                background: var(--color-surface-raised);
+                color: var(--color-text-primary);
+                border: 1px solid var(--color-border-default);
+                box-shadow: var(--shadow-xs);
+            }
+
+            .btn-secondary:hover:not(:disabled) {
+                background: var(--color-surface-subtle);
+                border-color: var(--color-border-strong);
+                box-shadow: var(--shadow-sm);
+            }
+
+            .btn-ghost {
+                background: transparent;
+                color: var(--color-text-secondary);
+                border: none;
+            }
+
+            .btn-ghost:hover:not(:disabled) {
+                background: var(--color-surface-subtle);
+                color: var(--color-text-primary);
+            }
+
+            /* Button Sizes */
+            .btn-sm {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--text-sm);
+            }
+
+            .btn-lg {
+                padding: var(--space-3_5) var(--space-7);
+                font-size: var(--text-lg);
+            }
+
+            /* Icon Button */
+            .btn-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+                padding: 0;
+                border-radius: var(--radius-full);
+            }
+
+            /* Loading State */
+            .btn-loading {
+                color: transparent;
+                pointer-events: none;
+                position: relative;
+            }
+
+            .btn-loading::before {
+                content: '';
+                position: absolute;
+                width: 1.25rem;
+                height: 1.25rem;
+                top: 50%;
+                left: 50%;
+                margin-left: -0.625rem;
+                margin-top: -0.625rem;
+                border: 2px solid var(--color-primary);
+                border-top-color: transparent;
+                border-radius: 50%;
+                animation: spin 0.6s linear infinite;
+            }
+
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               CARD COMPONENT - Paper-like with Subtle Shadows
+               ═══════════════════════════════════════════════════════════ */
+
+            .card {
+                background: var(--color-surface-paper);
+                border-radius: var(--radius-xl);
+                padding: var(--space-6);
+                box-shadow: var(--shadow-sm);
+                border: 1px solid var(--color-border-subtle);
+
+                /* Performance optimization */
+                contain: layout style;
+
+                /* Smooth transitions */
+                transition: all var(--duration-normal) var(--ease-out);
+            }
+
+            /* Interactive Card */
+            .card-interactive {
+                cursor: pointer;
+            }
+
+            .card-interactive:hover {
+                transform: translateY(var(--translate-hover));
+                box-shadow: var(--shadow-md);
+                border-color: var(--color-border-default);
+            }
+
+            /* Card with gradient border */
+            .card-gradient {
+                position: relative;
+                background: var(--color-surface-paper);
+                background-clip: padding-box;
+                border: 2px solid transparent;
+            }
+
+            .card-gradient::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                padding: 2px;
+                background: linear-gradient(
+                    135deg,
+                    var(--color-primary),
+                    var(--color-secondary),
+                    var(--color-accent)
+                );
+                -webkit-mask:
+                    linear-gradient(#fff 0 0) content-box,
+                    linear-gradient(#fff 0 0);
+                -webkit-mask-composite: xor;
+                mask:
+                    linear-gradient(#fff 0 0) content-box,
+                    linear-gradient(#fff 0 0);
+                mask-composite: exclude;
+                opacity: 0.3;
+                transition: opacity var(--duration-normal) var(--ease-out);
+            }
+
+            .card-gradient:hover::before {
+                opacity: 0.6;
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               FORM COMPONENTS - Accessible & Delightful
+               ═══════════════════════════════════════════════════════════ */
+
+            /* Form Group */
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+
+            /* Label */
+            .label {
+                font-size: var(--text-sm);
+                font-weight: var(--font-medium);
+                color: var(--color-text-secondary);
+            }
+
+            /* Input Base */
+            .input {
+                width: 100%;
+                padding: var(--space-3) var(--space-4);
+                font-family: inherit;
+                font-size: var(--text-base);
+                color: var(--color-text-primary);
+                background: var(--color-surface-paper);
+                border: 2px solid var(--color-border-default);
+                border-radius: var(--radius-lg);
+                transition: all var(--duration-fast) var(--ease-out);
+
+                /* Remove default styling */
+                appearance: none;
+            }
+
+            /* Input Focus */
+            .input:focus {
+                outline: none;
+                border-color: var(--color-primary);
+                box-shadow: 0 0 0 3px var(--color-focus-ring);
+            }
+
+            /* Input Hover */
+            .input:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-border-strong);
+            }
+
+            /* Input Disabled */
+            .input:disabled {
+                background: var(--color-surface-subtle);
+                color: var(--color-text-disabled);
+                cursor: not-allowed;
+            }
+
+            /* Input Error */
+            .input-error {
+                border-color: var(--color-danger);
+            }
+
+            .input-error:focus {
+                box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-danger) 25%, transparent);
+            }
+
+            /* Textarea */
+            .textarea {
+                min-height: 6rem;
+                resize: vertical;
+            }
+
+            /* Select */
+            .select {
+                cursor: pointer;
+                padding-right: var(--space-10);
+                background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right var(--space-3) center;
+                background-size: 1rem;
+            }
+
+            /* Checkbox & Radio */
+            .checkbox,
+            .radio {
+                width: 1.25rem;
+                height: 1.25rem;
+                margin: 0;
+                cursor: pointer;
+                accent-color: var(--color-primary);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               TOGGLE SWITCH - Whimsical Animation
+               ═══════════════════════════════════════════════════════════ */
+
+            .toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--space-3);
+                cursor: pointer;
+            }
+
+            .toggle-input {
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .toggle-slider {
+                position: relative;
+                width: 3rem;
+                height: 1.75rem;
+                background: var(--color-border-default);
+                border-radius: var(--radius-full);
+                transition: all var(--duration-normal) var(--ease-spring);
+            }
+
+            .toggle-slider::before {
+                content: '';
+                position: absolute;
+                top: 0.125rem;
+                left: 0.125rem;
+                width: 1.5rem;
+                height: 1.5rem;
+                background: white;
+                border-radius: var(--radius-full);
+                box-shadow: var(--shadow-sm);
+                transition: all var(--duration-normal) var(--ease-spring);
+            }
+
+            .toggle-input:checked + .toggle-slider {
+                background: linear-gradient(
+                    135deg,
+                    var(--color-primary),
+                    var(--color-secondary)
+                );
+            }
+
+            .toggle-input:checked + .toggle-slider::before {
+                transform: translateX(1.25rem);
+            }
+
+            .toggle-input:focus-visible + .toggle-slider {
+                box-shadow: 0 0 0 3px var(--color-focus-ring);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               ALERT COMPONENT - Soft & Friendly
+               ═══════════════════════════════════════════════════════════ */
+
+            .alert {
+                display: flex;
+                gap: var(--space-3);
+                padding: var(--space-4);
+                border-radius: var(--radius-lg);
+                border: 1px solid;
+                background: var(--color-surface-paper);
+            }
+
+            .alert-icon {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            .alert-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-1);
+            }
+
+            .alert-title {
+                font-weight: var(--font-semibold);
+                color: var(--color-text-primary);
+            }
+
+            .alert-description {
+                font-size: var(--text-sm);
+                color: var(--color-text-secondary);
+            }
+
+            /* Alert Variants */
+            .alert-success {
+                background: var(--color-success-bg);
+                border-color: var(--color-success-border);
+            }
+
+            .alert-success .alert-icon {
+                color: var(--color-success);
+            }
+
+            .alert-warning {
+                background: var(--color-warning-bg);
+                border-color: var(--color-warning-border);
+            }
+
+            .alert-warning .alert-icon {
+                color: var(--color-warning);
+            }
+
+            .alert-danger {
+                background: var(--color-danger-bg);
+                border-color: var(--color-danger-border);
+            }
+
+            .alert-danger .alert-icon {
+                color: var(--color-danger);
+            }
+
+            .alert-info {
+                background: var(--color-info-bg);
+                border-color: var(--color-info-border);
+            }
+
+            .alert-info .alert-icon {
+                color: var(--color-info);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               BADGE COMPONENT - Playful Accents
+               ═══════════════════════════════════════════════════════════ */
+
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--space-1);
+                padding: var(--space-1) var(--space-2_5);
+                font-size: var(--text-xs);
+                font-weight: var(--font-medium);
+                line-height: 1;
+                border-radius: var(--radius-full);
+                white-space: nowrap;
+            }
+
+            .badge-primary {
+                background: color-mix(in oklch, var(--color-primary) 20%, var(--color-surface-paper));
+                color: var(--color-primary);
+                border: 1px solid color-mix(in oklch, var(--color-primary) 30%, transparent);
+            }
+
+            .badge-secondary {
+                background: color-mix(in oklch, var(--color-secondary) 20%, var(--color-surface-paper));
+                color: var(--color-secondary);
+                border: 1px solid color-mix(in oklch, var(--color-secondary) 30%, transparent);
+            }
+
+            .badge-accent {
+                background: color-mix(in oklch, var(--color-accent) 20%, var(--color-surface-paper));
+                color: var(--color-accent);
+                border: 1px solid color-mix(in oklch, var(--color-accent) 30%, transparent);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               PROGRESS BAR - Animated Gradient
+               ═══════════════════════════════════════════════════════════ */
+
+            .progress {
+                width: 100%;
+                height: 0.5rem;
+                background: var(--color-surface-subtle);
+                border-radius: var(--radius-full);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .progress-bar {
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    var(--color-primary),
+                    var(--color-secondary),
+                    var(--color-accent)
+                );
+                background-size: 200% 100%;
+                border-radius: inherit;
+                transition: width var(--duration-slow) var(--ease-out);
+                animation: shimmer 3s ease-in-out infinite;
+            }
+
+            @keyframes shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               MODAL COMPONENT - Smooth Backdrop
+               ═══════════════════════════════════════════════════════════ */
+
+            .modal {
+                position: fixed;
+                inset: 0;
+                z-index: var(--z-modal);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: var(--space-4);
+
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--duration-normal) var(--ease-out);
+            }
+
+            .modal.modal-open {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .modal-backdrop {
+                position: absolute;
+                inset: 0;
+                background: color-mix(in oklch, var(--slate-900) 60%, transparent);
+                backdrop-filter: blur(var(--blur-sm));
+                -webkit-backdrop-filter: blur(var(--blur-sm));
+            }
+
+            .modal-content {
+                position: relative;
+                width: 100%;
+                max-width: 32rem;
+                max-height: 90vh;
+                background: var(--color-surface-paper);
+                border-radius: var(--radius-2xl);
+                box-shadow: var(--shadow-xl);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+
+                /* Animation */
+                transform: scale(0.9) translateY(1rem);
+                transition: transform var(--duration-normal) var(--ease-spring);
+            }
+
+            .modal-open .modal-content {
+                transform: scale(1) translateY(0);
+            }
+
+            .modal-header {
+                padding: var(--space-6);
+                border-bottom: 1px solid var(--color-border-subtle);
+            }
+
+            .modal-body {
+                padding: var(--space-6);
+                overflow-y: auto;
+                flex: 1;
+            }
+
+            .modal-footer {
+                padding: var(--space-6);
+                border-top: 1px solid var(--color-border-subtle);
+                display: flex;
+                gap: var(--space-3);
+                justify-content: flex-end;
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               TOOLTIP - Floating Information
+               ═══════════════════════════════════════════════════════════ */
+
+            .tooltip {
+                position: relative;
+                display: inline-block;
+            }
+
+            .tooltip-content {
+                position: absolute;
+                bottom: calc(100% + var(--space-2));
+                left: 50%;
+                transform: translateX(-50%) translateY(0.5rem);
+                padding: var(--space-2) var(--space-3);
+                background: var(--color-text-primary);
+                color: var(--color-surface-paper);
+                font-size: var(--text-sm);
+                white-space: nowrap;
+                border-radius: var(--radius-md);
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--duration-fast) var(--ease-out);
+                z-index: var(--z-tooltip);
+                pointer-events: none;
+                box-shadow: var(--shadow-lg);
+            }
+
+            /* Tooltip Arrow */
+            .tooltip-content::after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 6px solid transparent;
+                border-top-color: var(--color-text-primary);
+            }
+
+            .tooltip:hover .tooltip-content {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               SKELETON LOADER - Shimmering Effect
+               ═══════════════════════════════════════════════════════════ */
+
+            .skeleton {
+                background: linear-gradient(
+                    90deg,
+                    var(--color-surface-subtle) 25%,
+                    color-mix(in oklch, var(--color-surface-subtle) 90%, var(--color-surface-paper)) 50%,
+                    var(--color-surface-subtle) 75%
+                );
+                background-size: 400% 100%;
+                animation: skeleton-loading 1.5s ease-in-out infinite;
+                border-radius: var(--radius-md);
+            }
+
+            @keyframes skeleton-loading {
+                0% { background-position: 100% 50%; }
+                100% { background-position: 0 50%; }
+            }
+
+            .skeleton-text {
+                height: 1em;
+                margin-bottom: var(--space-2);
+            }
+
+            .skeleton-heading {
+                height: 2em;
+                width: 60%;
+                margin-bottom: var(--space-4);
+            }
+
+            .skeleton-avatar {
+                width: 3rem;
+                height: 3rem;
+                border-radius: var(--radius-full);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               AVATAR COMPONENT - Personal Touch
+               ═══════════════════════════════════════════════════════════ */
+
+            .avatar {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: var(--radius-full);
+                font-weight: var(--font-semibold);
+                font-size: var(--text-sm);
+                background: linear-gradient(
+                    135deg,
+                    var(--color-primary),
+                    var(--color-secondary)
+                );
+                color: white;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Avatar Sizes */
+            .avatar-sm {
+                width: 2rem;
+                height: 2rem;
+                font-size: var(--text-xs);
+            }
+
+            .avatar-lg {
+                width: 3rem;
+                height: 3rem;
+                font-size: var(--text-base);
+            }
+
+            .avatar-xl {
+                width: 4rem;
+                height: 4rem;
+                font-size: var(--text-lg);
+            }
+
+            /* Avatar Status Indicator */
+            .avatar-status {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 0.75rem;
+                height: 0.75rem;
+                background: var(--color-success);
+                border: 2px solid var(--color-surface-paper);
+                border-radius: var(--radius-full);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               TOAST NOTIFICATION - Floating Messages
+               ═══════════════════════════════════════════════════════════ */
+
+            .toast-container {
+                position: fixed;
+                bottom: var(--space-6);
+                right: var(--space-6);
+                z-index: var(--z-notification);
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-3);
+                pointer-events: none;
+            }
+
+            .toast {
+                display: flex;
+                align-items: flex-start;
+                gap: var(--space-3);
+                min-width: 20rem;
+                max-width: 24rem;
+                padding: var(--space-4);
+                background: var(--color-surface-paper);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-lg);
+                pointer-events: auto;
+                transform: translateX(calc(100% + var(--space-6)));
+                transition: transform var(--duration-normal) var(--ease-spring);
+            }
+
+            .toast.toast-visible {
+                transform: translateX(0);
+            }
+
+            .toast-icon {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            .toast-content {
+                flex: 1;
+            }
+
+            .toast-title {
+                font-weight: var(--font-semibold);
+                margin-bottom: var(--space-1);
+            }
+
+            .toast-message {
+                font-size: var(--text-sm);
+                color: var(--color-text-secondary);
+            }
+
+            /* ═══════════════════════════════════════════════════════════
+               CHIP COMPONENT - Removable Tags
+               ═══════════════════════════════════════════════════════════ */
+
+            .chip {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--space-1_5);
+                padding: var(--space-1_5) var(--space-3);
+                background: var(--color-surface-subtle);
+                border: 1px solid var(--color-border-subtle);
+                border-radius: var(--radius-full);
+                font-size: var(--text-sm);
+                font-weight: var(--font-medium);
+                transition: all var(--duration-fast) var(--ease-out);
+            }
+
+            .chip:hover {
+                background: var(--color-surface-paper);
+                border-color: var(--color-border-default);
+            }
+
+            .chip-remove {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 1rem;
+                height: 1rem;
+                border-radius: var(--radius-full);
+                cursor: pointer;
+                transition: all var(--duration-fast) var(--ease-out);
+            }
+
+            .chip-remove:hover {
+                background: var(--color-border-default);
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           UTILITIES LAYER - Helper Classes
+           ───────────────────────────────────────────────────────────── */
+        @layer utilities {
+            /* Display Utilities */
+            .hidden { display: none !important; }
+            .block { display: block !important; }
+            .inline-block { display: inline-block !important; }
+            .inline-flex { display: inline-flex !important; }
+
+            /* Text Utilities */
+            .text-xs { font-size: var(--text-xs) !important; }
+            .text-sm { font-size: var(--text-sm) !important; }
+            .text-base { font-size: var(--text-base) !important; }
+            .text-lg { font-size: var(--text-lg) !important; }
+            .text-xl { font-size: var(--text-xl) !important; }
+            .text-2xl { font-size: var(--text-2xl) !important; }
+            .text-3xl { font-size: var(--text-3xl) !important; }
+            .text-4xl { font-size: var(--text-4xl) !important; }
+            .text-5xl { font-size: var(--text-5xl) !important; }
+
+            .font-light { font-weight: var(--font-light) !important; }
+            .font-regular { font-weight: var(--font-regular) !important; }
+            .font-medium { font-weight: var(--font-medium) !important; }
+            .font-semibold { font-weight: var(--font-semibold) !important; }
+            .font-bold { font-weight: var(--font-bold) !important; }
+            .font-mono { font-family: var(--font-mono) !important; }
+
+            .text-center { text-align: center !important; }
+            .text-left { text-align: left !important; }
+            .text-right { text-align: right !important; }
+
+            .text-primary { color: var(--color-text-primary) !important; }
+            .text-secondary { color: var(--color-text-secondary) !important; }
+            .text-tertiary { color: var(--color-text-tertiary) !important; }
+            .text-success { color: var(--color-success) !important; }
+            .text-warning { color: var(--color-warning) !important; }
+            .text-danger { color: var(--color-danger) !important; }
+            .text-info { color: var(--color-info) !important; }
+
+            /* Spacing Utilities */
+            .mt-0 { margin-top: 0 !important; }
+            .mt-1 { margin-top: var(--space-1) !important; }
+            .mt-2 { margin-top: var(--space-2) !important; }
+            .mt-3 { margin-top: var(--space-3) !important; }
+            .mt-4 { margin-top: var(--space-4) !important; }
+            .mt-6 { margin-top: var(--space-6) !important; }
+            .mt-8 { margin-top: var(--space-8) !important; }
+            .mt-12 { margin-top: var(--space-12) !important; }
+            .mt-16 { margin-top: var(--space-16) !important; }
+
+            .mb-0 { margin-bottom: 0 !important; }
+            .mb-1 { margin-bottom: var(--space-1) !important; }
+            .mb-2 { margin-bottom: var(--space-2) !important; }
+            .mb-3 { margin-bottom: var(--space-3) !important; }
+            .mb-4 { margin-bottom: var(--space-4) !important; }
+            .mb-6 { margin-bottom: var(--space-6) !important; }
+            .mb-8 { margin-bottom: var(--space-8) !important; }
+            .mb-12 { margin-bottom: var(--space-12) !important; }
+            .mb-16 { margin-bottom: var(--space-16) !important; }
+
+            .py-2 { padding-top: var(--space-2) !important; padding-bottom: var(--space-2) !important; }
+            .py-4 { padding-top: var(--space-4) !important; padding-bottom: var(--space-4) !important; }
+            .py-6 { padding-top: var(--space-6) !important; padding-bottom: var(--space-6) !important; }
+            .py-8 { padding-top: var(--space-8) !important; padding-bottom: var(--space-8) !important; }
+            .py-12 { padding-top: var(--space-12) !important; padding-bottom: var(--space-12) !important; }
+            .py-16 { padding-top: var(--space-16) !important; padding-bottom: var(--space-16) !important; }
+
+            /* Width Utilities */
+            .w-full { width: 100% !important; }
+            .max-w-lg { max-width: 32rem !important; }
+            .max-w-2xl { max-width: 42rem !important; }
+            .max-w-4xl { max-width: 56rem !important; }
+
+            /* Border Utilities */
+            .border-t { border-top: 1px solid var(--color-border-subtle) !important; }
+            .border-b { border-bottom: 1px solid var(--color-border-subtle) !important; }
+
+            /* Background Utilities */
+            .bg-primary { background-color: var(--color-primary) !important; }
+            .bg-secondary { background-color: var(--color-secondary) !important; }
+            .bg-accent { background-color: var(--color-accent) !important; }
+            .bg-surface-base { background-color: var(--color-surface-base) !important; }
+            .bg-surface-paper { background-color: var(--color-surface-paper) !important; }
+            .bg-surface-subtle { background-color: var(--color-surface-subtle) !important; }
+
+            /* Gradient Backgrounds */
+            .bg-gradient-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--color-primary),
+                    color-mix(in oklch, var(--color-primary) 70%, var(--color-secondary))
+                ) !important;
+            }
+
+            .bg-gradient-whimsy {
+                background: linear-gradient(
+                    135deg,
+                    var(--lavender-300),
+                    var(--mint-300),
+                    var(--peach-300),
+                    var(--sky-300)
+                ) !important;
+                background-size: 400% 400%;
+                animation: gradient-shift 15s ease infinite;
+            }
+
+            @keyframes gradient-shift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            /* Shadow Utilities */
+            .shadow-sm { box-shadow: var(--shadow-sm) !important; }
+            .shadow-md { box-shadow: var(--shadow-md) !important; }
+            .shadow-lg { box-shadow: var(--shadow-lg) !important; }
+            .shadow-xl { box-shadow: var(--shadow-xl) !important; }
+
+            /* Rounded Utilities */
+            .rounded-sm { border-radius: var(--radius-sm) !important; }
+            .rounded-md { border-radius: var(--radius-md) !important; }
+            .rounded-lg { border-radius: var(--radius-lg) !important; }
+            .rounded-xl { border-radius: var(--radius-xl) !important; }
+            .rounded-2xl { border-radius: var(--radius-2xl) !important; }
+            .rounded-full { border-radius: var(--radius-full) !important; }
+
+            /* Overflow Utilities */
+            .overflow-hidden { overflow: hidden !important; }
+            .overflow-auto { overflow: auto !important; }
+
+            /* Position Utilities */
+            .relative { position: relative !important; }
+            .absolute { position: absolute !important; }
+            .fixed { position: fixed !important; }
+            .sticky { position: sticky !important; }
+
+            /* Z-Index Utilities */
+            .z-10 { z-index: 10 !important; }
+            .z-20 { z-index: 20 !important; }
+            .z-30 { z-index: 30 !important; }
+            .z-40 { z-index: 40 !important; }
+            .z-50 { z-index: 50 !important; }
+
+            /* Transition Utilities */
+            .transition-all {
+                transition: all var(--duration-normal) var(--ease-out) !important;
+            }
+
+            .transition-transform {
+                transition: transform var(--duration-normal) var(--ease-out) !important;
+            }
+
+            .transition-colors {
+                transition: background-color var(--duration-normal) var(--ease-out),
+                            border-color var(--duration-normal) var(--ease-out),
+                            color var(--duration-normal) var(--ease-out) !important;
+            }
+
+            /* Animation Utilities */
+            .animate-pulse {
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+
+            .animate-bounce {
+                animation: bounce 1s infinite;
+            }
+
+            @keyframes bounce {
+                0%, 100% {
+                    transform: translateY(-25%);
+                    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+                }
+                50% {
+                    transform: translateY(0);
+                    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                }
+            }
+
+            /* Accessibility Utilities */
+            .sr-only {
+                position: absolute !important;
+                width: 1px !important;
+                height: 1px !important;
+                padding: 0 !important;
+                margin: -1px !important;
+                overflow: hidden !important;
+                clip: rect(0, 0, 0, 0) !important;
+                white-space: nowrap !important;
+                border: 0 !important;
+            }
+
+            .focus-within\:ring-2:focus-within {
+                box-shadow: 0 0 0 3px var(--color-focus-ring) !important;
+            }
+
+            /* Print Utilities */
+            @media print {
+                .no-print {
+                    display: none !important;
+                }
+
+                .print-only {
+                    display: block !important;
+                }
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           OVERRIDES LAYER - Demo Specific Styles
+           ───────────────────────────────────────────────────────────── */
+        @layer overrides {
+            /* Hero Section */
+            .hero {
+                position: relative;
+                overflow: hidden;
+                background: var(--color-surface-base);
+            }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(
+                    circle at 20% 80%,
+                    color-mix(in oklch, var(--lavender-300) 20%, transparent) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    circle at 80% 20%,
+                    color-mix(in oklch, var(--mint-300) 20%, transparent) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    circle at 40% 40%,
+                    color-mix(in oklch, var(--peach-300) 15%, transparent) 0%,
+                    transparent 50%
+                );
+                animation: float 20s ease-in-out infinite;
+                pointer-events: none;
+            }
+
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                33% { transform: translate(30px, -30px) rotate(120deg); }
+                66% { transform: translate(-20px, 20px) rotate(240deg); }
+            }
+
+            /* Section Styles */
+            .section {
+                position: relative;
+                padding: var(--space-16) 0;
+                border-bottom: 1px solid var(--color-border-subtle);
+            }
+
+            .section-header {
+                max-width: 48rem;
+                margin-bottom: var(--space-12);
+            }
+
+            .section-title {
+                font-size: var(--text-4xl);
+                font-weight: var(--font-bold);
+                margin-bottom: var(--space-4);
+                background: linear-gradient(
+                    135deg,
+                    var(--color-text-primary),
+                    var(--color-primary)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .section-subtitle {
+                font-size: var(--text-lg);
+                color: var(--color-text-secondary);
+                line-height: var(--leading-relaxed);
+            }
+
+            /* Code Block Styling */
+            .code-block {
+                background: var(--color-surface-subtle);
+                border: 1px solid var(--color-border-subtle);
+                border-radius: var(--radius-lg);
+                padding: var(--space-4);
+                overflow-x: auto;
+                margin-bottom: var(--space-6);
+                position: relative;
+            }
+
+            .code-block pre {
+                margin: 0;
+                background: transparent;
+                padding: 0;
+            }
+
+            .code-block code {
+                background: transparent;
+                padding: 0;
+                color: var(--color-text-primary);
+            }
+
+            /* Copy Button */
+            .copy-button {
+                position: absolute;
+                top: var(--space-2);
+                right: var(--space-2);
+                padding: var(--space-1_5) var(--space-2_5);
+                background: var(--color-surface-paper);
+                border: 1px solid var(--color-border-default);
+                border-radius: var(--radius-md);
+                font-size: var(--text-xs);
+                cursor: pointer;
+                transition: all var(--duration-fast) var(--ease-out);
+            }
+
+            .copy-button:hover {
+                background: var(--color-primary);
+                color: white;
+                border-color: var(--color-primary);
+            }
+
+            /* Demo Grid */
+            .demo-grid {
+                display: grid;
+                gap: var(--space-6);
+                grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            }
+
+            /* Color Swatch */
+            .color-swatch {
+                display: flex;
+                align-items: center;
+                gap: var(--space-3);
+                padding: var(--space-3);
+                background: var(--color-surface-paper);
+                border-radius: var(--radius-lg);
+                border: 1px solid var(--color-border-subtle);
+                transition: all var(--duration-fast) var(--ease-out);
+            }
+
+            .color-swatch:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-md);
+            }
+
+            .color-swatch-preview {
+                width: 4rem;
+                height: 4rem;
+                border-radius: var(--radius-md);
+                box-shadow: inset 0 0 0 1px color-mix(in oklch, black 10%, transparent);
+            }
+
+            .color-swatch-info {
+                flex: 1;
+            }
+
+            .color-swatch-name {
+                font-weight: var(--font-semibold);
+                margin-bottom: var(--space-1);
+            }
+
+            .color-swatch-value {
+                font-family: var(--font-mono);
+                font-size: var(--text-sm);
+                color: var(--color-text-tertiary);
+            }
+
+            /* Interactive Demo */
+            .demo-interactive {
+                padding: var(--space-8);
+                background: var(--color-surface-paper);
+                border-radius: var(--radius-xl);
+                box-shadow: var(--shadow-sm);
+                border: 1px solid var(--color-border-subtle);
+            }
+
+            /* Feature Card */
+            .feature-card {
+                text-align: center;
+                padding: var(--space-6);
+            }
+
+            .feature-icon {
+                width: 3rem;
+                height: 3rem;
+                margin: 0 auto var(--space-4);
+                color: var(--color-primary);
+            }
+
+            .feature-title {
+                font-size: var(--text-lg);
+                font-weight: var(--font-semibold);
+                margin-bottom: var(--space-2);
+            }
+
+            .feature-description {
+                font-size: var(--text-sm);
+                color: var(--color-text-secondary);
+                line-height: var(--leading-relaxed);
+            }
+
+            /* Responsive Demo Container */
+            .responsive-demo {
+                container-type: inline-size;
+                container-name: demo;
+            }
+
+            @container demo (min-width: 40rem) {
+                .container-responsive {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            /* Performance Optimizations */
+            .section,
+            .card,
+            .demo-interactive {
+                content-visibility: auto;
+                contain-intrinsic-size: auto 500px;
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────────
+           ACCESSIBILITY ENHANCEMENTS
+           ───────────────────────────────────────────────────────────── */
+
+        /* Reduced Motion Preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .hero::before {
+                animation: none !important;
+            }
+
+            .bg-gradient-whimsy {
+                animation: none !important;
+            }
+        }
+
+        /* High Contrast Mode Adjustments */
+        @media (prefers-contrast: high) {
+            .btn {
+                border-width: 2px;
+            }
+
+            .input,
+            .textarea,
+            .select {
+                border-width: 2px;
+            }
+
+            .card {
+                border-width: 2px;
+            }
+        }
+
+        /* Dark Mode Color Scheme */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                color-scheme: dark;
+            }
+        }
+
+        /* Focus Visible Polyfill */
+        .js-focus-visible :focus:not(.focus-visible) {
+            outline: none;
+        }
+
+        /* Skip to Content */
+        .skip-to-content {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+        }
+
+        .skip-to-content:focus {
+            left: var(--space-4);
+            top: var(--space-4);
+        }
+
+        /* Live Region for Announcements */
+        .sr-live {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /* ARIA Busy State */
+        [aria-busy="true"] {
+            cursor: progress;
+        }
+
+        /* Ensure Interactive Elements Have Minimum Size */
+        input:not([type="checkbox"]):not([type="radio"]),
+        select,
+        textarea {
+            min-height: 44px;
+        }
+
+        /* Touch targets for buttons and links handled by their specific classes */
+        .btn:not(.btn-icon) {
+            min-height: 36px;
+        }
+
+        .btn.btn-lg:not(.btn-icon) {
+            min-height: 44px;
+        }
+
+        /* Custom Focus Indicator for Better Visibility */
+        *:focus-visible {
+            outline: 3px solid var(--color-focus);
+            outline-offset: 2px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to Content Link -->
+    <a href="#main" class="skip-to-content">Skip to main content</a>
+
+    <!-- Live Region for Announcements -->
+    <div class="sr-live" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Hero Section -->
+    <header class="hero py-16">
+        <!-- Theme Toggle in Header -->
+        <button class="btn btn-icon btn-ghost" 
+                onclick="AuroraDS.theme.toggle()" 
+                aria-label="Toggle theme"
+                style="position: fixed; top: 1rem; right: 1rem; z-index: 1000;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+        </button>
+        <div class="container">
+            <div class="text-center max-w-4xl" style="margin: 0 auto; position: relative; z-index: 1;">
+                <h1 class="text-5xl font-bold mb-6">
+                    Aurora Design System
+                </h1>
+                <p class="text-xl text-secondary mb-8">
+                    Where enterprise meets whimsy. A modern design system that brings joy to professional software
+                    through thoughtful color, subtle animation, and accessible components.
+                </p>
+                <div class="cluster justify-center">
+                    <button class="btn btn-primary btn-lg" onclick="AuroraDS.theme.toggle()">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="flex-shrink: 0;">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Toggle Theme</span>
+                    </button>
+                    <button class="btn btn-secondary btn-lg" onclick="AuroraDS.modal.show('design-tokens-modal')">
+                        View Design Tokens
+                    </button>
+                    <button class="btn btn-ghost btn-lg" onclick="AuroraDS.showToast('Download started!', 'success')">
+                        Download System
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Color System Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Color System</h2>
+                    <p class="section-subtitle">
+                        A carefully crafted palette that balances professionalism with personality.
+                        Our cream and slate foundation provides elegance, while muted pastels add just enough whimsy.
+                    </p>
+                </div>
+
+                <div class="stack-lg">
+                    <!-- Primary Colors -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Primary Palette</h3>
+                        <div class="demo-grid">
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--lavender-400)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Lavender Dream</div>
+                                    <div class="color-swatch-value">var(--lavender-400)</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--mint-400)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Mint Whisper</div>
+                                    <div class="color-swatch-value">var(--mint-400)</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--peach-400)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Peach Bloom</div>
+                                    <div class="color-swatch-value">var(--peach-400)</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--sky-400)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Sky Mist</div>
+                                    <div class="color-swatch-value">var(--sky-400)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Neutral Colors -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Neutral Foundation</h3>
+                        <div class="demo-grid">
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--cream-100)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Warm Cream</div>
+                                    <div class="color-swatch-value">var(--cream-100)</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--cream-200)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Soft Cream</div>
+                                    <div class="color-swatch-value">var(--cream-200)</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--slate-500)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Lavender Slate</div>
+                                    <div class="color-swatch-value">var(--slate-500)</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch-preview" style="background: var(--slate-700)"></div>
+                                <div class="color-swatch-info">
+                                    <div class="color-swatch-name">Twilight Slate</div>
+                                    <div class="color-swatch-value">var(--slate-700)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Component Library</h2>
+                    <p class="section-subtitle">
+                        Enterprise-ready components with a touch of personality. Each element is designed for
+                        accessibility, performance, and that subtle "something special" that makes work enjoyable.
+                    </p>
+                </div>
+
+                <div class="stack-xl">
+                    <!-- Buttons -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Buttons</h3>
+                        <div class="demo-interactive">
+                            <div class="stack-lg">
+                                <div>
+                                    <p class="text-sm text-tertiary mb-3">Sizes</p>
+                                    <div class="cluster">
+                                        <button class="btn btn-primary btn-sm">Small Button</button>
+                                        <button class="btn btn-primary">Default Button</button>
+                                        <button class="btn btn-primary btn-lg">Large Button</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-tertiary mb-3">Variants</p>
+                                    <div class="cluster">
+                                        <button class="btn btn-primary">Primary</button>
+                                        <button class="btn btn-secondary">Secondary</button>
+                                        <button class="btn btn-ghost">Ghost</button>
+                                        <button class="btn btn-primary" disabled>Disabled</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-tertiary mb-3">With Icons</p>
+                                    <div class="cluster">
+                                        <button class="btn btn-primary">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M8 3v10m5-5H3"/>
+                                            </svg>
+                                            Add Item
+                                        </button>
+                                        <button class="btn btn-secondary">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M7 2L2 7l5 5m7-5H3"/>
+                                            </svg>
+                                            Go Back
+                                        </button>
+                                        <button class="btn btn-icon btn-ghost" aria-label="Settings">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="8" cy="8" r="3"/>
+                                                <path d="M8 1v2m0 10v2m7-7h-2M3 8H1m11.07-4.07l-1.41 1.41M5.34 10.66l-1.41 1.41m7.32 0l-1.41-1.41M5.34 5.34L3.93 3.93"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forms -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Form Elements</h3>
+                        <div class="demo-interactive">
+                            <form class="stack" onsubmit="event.preventDefault(); AuroraDS.showToast('Form submitted!', 'success')">
+                                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                                    <div class="form-group">
+                                        <label for="demo-input" class="label">Text Input</label>
+                                        <input type="text" id="demo-input" class="input" placeholder="Enter some text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="demo-select" class="label">Select Dropdown</label>
+                                        <select id="demo-select" class="input select">
+                                            <option>Choose an option</option>
+                                            <option>Option 1</option>
+                                            <option>Option 2</option>
+                                            <option>Option 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="demo-textarea" class="label">Textarea</label>
+                                    <textarea id="demo-textarea" class="input textarea" placeholder="Enter a longer message"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="toggle">
+                                        <input type="checkbox" class="toggle-input">
+                                        <span class="toggle-slider"></span>
+                                        <span>Enable notifications</span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Cards -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Cards</h3>
+                        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                            <div class="card">
+                                <h4 class="text-lg font-semibold mb-2">Standard Card</h4>
+                                <p class="text-secondary">
+                                    A basic card component with subtle shadow and border for content separation.
+                                </p>
+                            </div>
+                            <div class="card card-interactive" onclick="AuroraDS.showToast('Card clicked!', 'info')">
+                                <h4 class="text-lg font-semibold mb-2">Interactive Card</h4>
+                                <p class="text-secondary">
+                                    This card lifts on hover, perfect for clickable content or navigation items.
+                                </p>
+                            </div>
+                            <div class="card card-gradient">
+                                <h4 class="text-lg font-semibold mb-2">Gradient Border Card</h4>
+                                <p class="text-secondary">
+                                    A special card with an animated gradient border for highlighting important content.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alerts -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Alert Messages</h3>
+                        <div class="stack">
+                            <div class="alert alert-success" role="alert">
+                                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                                <div class="alert-content">
+                                    <div class="alert-title">Success!</div>
+                                    <div class="alert-description">Your changes have been saved successfully.</div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-warning" role="alert">
+                                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"/>
+                                </svg>
+                                <div class="alert-content">
+                                    <div class="alert-title">Warning</div>
+                                    <div class="alert-description">Please review your input before proceeding.</div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info" role="alert">
+                                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+                                </svg>
+                                <div class="alert-content">
+                                    <div class="alert-title">Information</div>
+                                    <div class="alert-description">This feature will be available in the next update.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress & Loading -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Progress Indicators</h3>
+                        <div class="demo-interactive">
+                            <div class="stack">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm">Upload Progress</span>
+                                        <span class="text-sm text-tertiary">45%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm">Processing</span>
+                                        <span class="text-sm text-tertiary">78%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 78%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <p class="text-sm text-tertiary mb-3">Loading States</p>
+                                    <div class="cluster">
+                                        <button class="btn btn-primary btn-loading">Loading</button>
+                                        <div class="skeleton skeleton-text" style="width: 200px"></div>
+                                        <div class="skeleton skeleton-avatar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges & Chips -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Badges & Chips</h3>
+                        <div class="demo-interactive">
+                            <div class="stack">
+                                <div>
+                                    <p class="text-sm text-tertiary mb-3">Badges</p>
+                                    <div class="cluster">
+                                        <span class="badge badge-primary">Primary</span>
+                                        <span class="badge badge-secondary">Secondary</span>
+                                        <span class="badge badge-accent">Accent</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-tertiary mb-3">Chips</p>
+                                    <div class="cluster">
+                                        <div class="chip">
+                                            React
+                                        </div>
+                                        <div class="chip">
+                                            TypeScript
+                                        </div>
+                                        <div class="chip">
+                                            Design System
+                                            <button class="chip-remove" aria-label="Remove" onclick="this.parentElement.remove()">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                                    <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="2"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-tertiary mb-3">Avatars</p>
+                                    <div class="cluster items-center">
+                                        <div class="avatar avatar-sm">JD</div>
+                                        <div class="avatar">AS</div>
+                                        <div class="avatar avatar-lg">
+                                            MK
+                                            <span class="avatar-status"></span>
+                                        </div>
+                                        <div class="avatar avatar-xl">TC</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Typography System</h2>
+                    <p class="section-subtitle">
+                        A fluid type scale that adapts to viewport size, ensuring readability across all devices
+                        while maintaining visual hierarchy and brand personality.
+                    </p>
+                </div>
+
+                <div class="demo-interactive">
+                    <div class="stack-lg">
+                        <div>
+                            <h1 class="text-5xl">Heading 1 - Bold Statement</h1>
+                            <p class="text-tertiary font-mono text-sm">text-5xl · font-bold · var(--text-5xl)</p>
+                        </div>
+                        <div>
+                            <h2 class="text-4xl">Heading 2 - Section Title</h2>
+                            <p class="text-tertiary font-mono text-sm">text-4xl · font-semibold · var(--text-4xl)</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl">Heading 3 - Subsection</h3>
+                            <p class="text-tertiary font-mono text-sm">text-3xl · font-semibold · var(--text-3xl)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl">Heading 4 - Component Title</h4>
+                            <p class="text-tertiary font-mono text-sm">text-2xl · font-semibold · var(--text-2xl)</p>
+                        </div>
+                        <div>
+                            <p class="text-lg">
+                                Large body text for introductions and important paragraphs that need extra emphasis.
+                            </p>
+                            <p class="text-tertiary font-mono text-sm">text-lg · font-regular · var(--text-lg)</p>
+                        </div>
+                        <div>
+                            <p>
+                                Default body text that forms the foundation of our content. Optimized for readability
+                                with comfortable line height and letter spacing.
+                            </p>
+                            <p class="text-tertiary font-mono text-sm">text-base · font-regular · var(--text-base)</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-secondary">
+                                Small text for supporting information, captions, and metadata.
+                            </p>
+                            <p class="text-tertiary font-mono text-sm">text-sm · font-regular · var(--text-sm)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Motion & Animation Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Motion & Animation</h2>
+                    <p class="section-subtitle">
+                        Thoughtful micro-interactions that add personality without overwhelming.
+                        Every animation serves a purpose and respects user preferences.
+                    </p>
+                </div>
+
+                <div class="demo-grid">
+                    <div class="demo-interactive text-center">
+                        <h3 class="text-lg font-semibold mb-4">Spring Animations</h3>
+                        <button class="btn btn-primary" onclick="this.style.transform = 'scale(1.1)'; setTimeout(() => this.style.transform = '', 200)">
+                            Click for Spring
+                        </button>
+                        <p class="text-sm text-tertiary mt-3">Playful bounce for delightful feedback</p>
+                    </div>
+
+                    <div class="demo-interactive text-center">
+                        <h3 class="text-lg font-semibold mb-4">Hover Effects</h3>
+                        <div class="card card-interactive" style="padding: var(--space-4);">
+                            <p>Hover to lift</p>
+                        </div>
+                        <p class="text-sm text-tertiary mt-3">Subtle elevation changes</p>
+                    </div>
+
+                    <div class="demo-interactive text-center">
+                        <h3 class="text-lg font-semibold mb-4">Loading Animation</h3>
+                        <div class="skeleton skeleton-text" style="width: 100%; margin: 0 auto;"></div>
+                        <p class="text-sm text-tertiary mt-3">Smooth skeleton loading</p>
+                    </div>
+
+                    <div class="demo-interactive text-center">
+                        <h3 class="text-lg font-semibold mb-4">Focus Transitions</h3>
+                        <input type="text" class="input" placeholder="Tab to focus" style="max-width: 200px;">
+                        <p class="text-sm text-tertiary mt-3">Smooth focus indicators</p>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <div class="alert alert-info" role="alert">
+                        <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+                        </svg>
+                        <div class="alert-content">
+                            <div class="alert-title">Accessibility First</div>
+                            <div class="alert-description">
+                                All animations respect <code>prefers-reduced-motion</code> settings and can be disabled system-wide.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Examples Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Implementation Examples</h2>
+                    <p class="section-subtitle">
+                        Real-world code examples showing how to implement Aurora components across different frameworks
+                        and maintain consistency with our design tokens.
+                    </p>
+                </div>
+
+                <div class="stack-lg">
+                    <!-- CSS Variables -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Design Tokens Usage</h3>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code>/* Using Aurora Design Tokens */
+.custom-component {
+  /* Colors */
+  background: var(--color-surface-paper);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-subtle);
+
+  /* Spacing */
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  gap: var(--space-3);
+
+  /* Typography */
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+
+  /* Border Radius */
+  border-radius: var(--radius-lg);
+
+  /* Shadows */
+  box-shadow: var(--shadow-sm);
+
+  /* Transitions */
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+
+/* Hover State */
+.custom-component:hover {
+  transform: translateY(var(--translate-hover));
+  box-shadow: var(--shadow-md);
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- React Component -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">React Component</h3>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code>import { useState } from 'react';
+import { Button, Card, Badge } from '@aurora/react';
+
+function FeatureCard({ title, description, status }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    &lt;Card
+      variant={isHovered ? 'interactive' : 'default'}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    &gt;
+      &lt;Card.Header&gt;
+        &lt;h3&gt;{title}&lt;/h3&gt;
+        &lt;Badge variant={status === 'new' ? 'primary' : 'secondary'}&gt;
+          {status}
+        &lt;/Badge&gt;
+      &lt;/Card.Header&gt;
+      &lt;Card.Body&gt;
+        &lt;p&gt;{description}&lt;/p&gt;
+      &lt;/Card.Body&gt;
+      &lt;Card.Footer&gt;
+        &lt;Button variant="primary" size="sm"&gt;
+          Learn More
+        &lt;/Button&gt;
+      &lt;/Card.Footer&gt;
+    &lt;/Card&gt;
+  );
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- TypeScript Types -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">TypeScript Definitions</h3>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code>// Aurora Design System Type Definitions
+export interface AuroraTheme {
+  colors: {
+    primary: ColorScale;
+    secondary: ColorScale;
+    accent: ColorScale;
+    neutral: NeutralScale;
+    semantic: SemanticColors;
+  };
+  spacing: SpacingScale;
+  typography: TypographySystem;
+  shadows: ShadowScale;
+  motion: MotionTokens;
+}
+
+export interface ColorScale {
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+}
+
+export interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  as?: React.ElementType;
+  children: React.ReactNode;
+  onClick?: (event: React.MouseEvent&lt;HTMLButtonElement&gt;) => void;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Accessibility Example -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Accessibility Patterns</h3>
+                        <div class="code-block">
+                            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                            <pre><code>&lt;!-- Accessible Modal Pattern --&gt;
+&lt;div
+  class="modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+&gt;
+  &lt;div class="modal-backdrop" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;div class="modal-header"&gt;
+      &lt;h2 id="modal-title"&gt;Confirm Action&lt;/h2&gt;
+      &lt;button
+        class="btn btn-icon btn-ghost"
+        aria-label="Close modal"
+        onclick="closeModal()"
+      &gt;
+        &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-body"&gt;
+      &lt;p id="modal-description"&gt;
+        Are you sure you want to proceed with this action?
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-footer"&gt;
+      &lt;button class="btn btn-ghost" onclick="closeModal()"&gt;
+        Cancel
+      &lt;/button&gt;
+      &lt;button class="btn btn-primary" onclick="confirmAction()"&gt;
+        Confirm
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Philosophy Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Design Philosophy</h2>
+                    <p class="section-subtitle">
+                        Aurora bridges the gap between enterprise requirements and human delight.
+                        We believe professional software doesn't have to feel sterile.
+                    </p>
+                </div>
+
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <div class="card feature-card">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <h3 class="feature-title">Refined Whimsy</h3>
+                        <p class="feature-description">
+                            Subtle animations and soft pastels that bring joy without sacrificing professionalism.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11H3m6 0V5m0 6l-6-6m11 0h6m-6 0V5m0 6l6-6m0 11v6m0-6h6m-6 0l6 6m-11 0H9m0 0v6m0-6l-6 6"/>
+                        </svg>
+                        <h3 class="feature-title">Accessibility First</h3>
+                        <p class="feature-description">
+                            WCAG AAA compliance with APCA contrast calculations and comprehensive keyboard support.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <h3 class="feature-title">Performance Focused</h3>
+                        <p class="feature-description">
+                            Modern CSS architecture with containment, layers, and optimized rendering paths.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <h3 class="feature-title">Enterprise Ready</h3>
+                        <p class="feature-description">
+                            Multi-brand theming, RTL support, and comprehensive documentation for large teams.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        <h3 class="feature-title">Modern Stack</h3>
+                        <p class="feature-description">
+                            Built with CSS layers, container queries, and color-mix for future-proof flexibility.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <h3 class="feature-title">Developer Experience</h3>
+                        <p class="feature-description">
+                            TypeScript support, framework adapters, and extensive tooling for rapid development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="section border-t">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Aurora Design System</h3>
+                    <p class="text-secondary max-w-lg">
+                        A modern design system that proves enterprise software can be both powerful and delightful.
+                        Built with love for developers, designers, and most importantly, users.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="stack-sm">
+                        <li><a href="#" class="text-secondary">Documentation</a></li>
+                        <li><a href="#" class="text-secondary">Component Library</a></li>
+                        <li><a href="#" class="text-secondary">Design Tokens</a></li>
+                        <li><a href="#" class="text-secondary">Contributing Guide</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Community</h4>
+                    <ul class="stack-sm">
+                        <li><a href="#" class="text-secondary">GitHub</a></li>
+                        <li><a href="#" class="text-secondary">Discord</a></li>
+                        <li><a href="#" class="text-secondary">Twitter</a></li>
+                        <li><a href="#" class="text-secondary">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t text-center">
+                <p class="text-sm text-tertiary">
+                    © 2024 Aurora Design System. Licensed under MIT. Made with 🦄✨
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Example -->
+    <div class="modal" id="design-tokens-modal" role="dialog" aria-modal="true" aria-labelledby="tokens-modal-title">
+        <div class="modal-backdrop" onclick="AuroraDS.modal.hide('design-tokens-modal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tokens-modal-title" class="text-2xl font-semibold">Design Tokens</h2>
+            </div>
+            <div class="modal-body">
+                <p class="mb-4">
+                    Aurora's design tokens are the foundation of our system. They ensure consistency
+                    across all platforms and enable dynamic theming.
+                </p>
+                <div class="stack">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Installation</h3>
+                        <div class="code-block">
+                            <pre><code>npm install @aurora/design-tokens
+# or
+yarn add @aurora/design-tokens</code></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Usage</h3>
+                        <div class="code-block">
+                            <pre><code>// Import tokens
+import { tokens } from '@aurora/design-tokens';
+
+// Use in CSS-in-JS
+const styles = {
+  background: tokens.colors.surface.paper,
+  color: tokens.colors.text.primary,
+  padding: tokens.spacing[4],
+  borderRadius: tokens.radius.lg
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="AuroraDS.modal.hide('design-tokens-modal')">Close</button>
+                <button class="btn btn-primary" onclick="window.open('https://github.com/aurora-ds/tokens', '_blank')">View on GitHub</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // Aurora Design System JavaScript
+        window.AuroraDS = {
+            // Theme Management
+            theme: {
+                current: localStorage.getItem('aurora-theme') || 'light',
+
+                init() {
+                    // Apply saved theme
+                    if (this.current === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                    }
+
+                    // Listen for system preference changes
+                    if (window.matchMedia) {
+                        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                        darkModeQuery.addEventListener('change', (e) => {
+                            if (!localStorage.getItem('aurora-theme')) {
+                                this.set(e.matches ? 'dark' : 'light');
+                            }
+                        });
+                    }
+                },
+
+                toggle() {
+                    this.set(this.current === 'light' ? 'dark' : 'light');
+                },
+
+                set(theme) {
+                    this.current = theme;
+                    localStorage.setItem('aurora-theme', theme);
+
+                    if (theme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                    } else {
+                        document.documentElement.removeAttribute('data-theme');
+                    }
+
+                    // Announce to screen readers
+                    this.announceThemeChange(theme);
+                },
+
+                announceThemeChange(theme) {
+                    const announcement = document.createElement('div');
+                    announcement.textContent = `Theme changed to ${theme} mode`;
+                    announcement.setAttribute('role', 'status');
+                    announcement.setAttribute('aria-live', 'polite');
+                    announcement.className = 'sr-only';
+                    document.body.appendChild(announcement);
+                    setTimeout(() => announcement.remove(), 1000);
+                }
+            },
+
+            // Modal Management
+            modal: {
+                previousFocus: null,
+                escapeHandler: null,
+
+                show(modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (!modal) return;
+
+                    // Show modal
+                    modal.classList.add('modal-open');
+                    document.body.style.overflow = 'hidden';
+
+                    // Focus management
+                    AuroraDS.modal.previousFocus = document.activeElement;
+                    const focusableElements = modal.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                    if (focusableElements.length) {
+                        focusableElements[0].focus();
+                    }
+
+                    // Trap focus
+                    AuroraDS.modal.trapFocus(modal);
+
+                    // Close on escape
+                    AuroraDS.modal.escapeHandler = (e) => {
+                        if (e.key === 'Escape') {
+                            AuroraDS.modal.hide(modalId);
+                        }
+                    };
+                    document.addEventListener('keydown', AuroraDS.modal.escapeHandler);
+                },
+
+                hide(modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (!modal) return;
+
+                    // Hide modal
+                    modal.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+
+                    // Restore focus
+                    if (AuroraDS.modal.previousFocus) {
+                        AuroraDS.modal.previousFocus.focus();
+                    }
+
+                    // Remove event listeners
+                    if (AuroraDS.modal.escapeHandler) {
+                        document.removeEventListener('keydown', AuroraDS.modal.escapeHandler);
+                        AuroraDS.modal.escapeHandler = null;
+                    }
+                },
+
+                trapFocus(modal) {
+                    const focusableElements = modal.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                    const firstFocusable = focusableElements[0];
+                    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+                    modal.addEventListener('keydown', (e) => {
+                        if (e.key !== 'Tab') return;
+
+                        if (e.shiftKey && document.activeElement === firstFocusable) {
+                            e.preventDefault();
+                            lastFocusable.focus();
+                        } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+                            e.preventDefault();
+                            firstFocusable.focus();
+                        }
+                    });
+                }
+            },
+
+            // Toast Notifications
+            showToast(message, type = 'info') {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'polite');
+
+                // Icon based on type
+                const icons = {
+                    success: '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>',
+                    warning: '<path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"/>',
+                    danger: '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>',
+                    info: '<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>'
+                };
+
+                const iconColor = {
+                    success: 'var(--color-success)',
+                    warning: 'var(--color-warning)',
+                    danger: 'var(--color-danger)',
+                    info: 'var(--color-info)'
+                };
+
+                // Track auto-remove timeout
+                let autoRemoveTimeout;
+                let fadeTimeout;
+
+                const removeToast = () => {
+                    if (autoRemoveTimeout) clearTimeout(autoRemoveTimeout);
+                    if (fadeTimeout) clearTimeout(fadeTimeout);
+                    toast.remove();
+                };
+
+                toast.innerHTML = `
+                    <svg class="toast-icon" style="color: ${iconColor[type]}" viewBox="0 0 20 20" fill="currentColor">
+                        ${icons[type]}
+                    </svg>
+                    <div class="toast-content">
+                        <div class="toast-message">${message}</div>
+                    </div>
+                    <button class="btn btn-icon btn-ghost" style="width: 1.5rem; height: 1.5rem; min-width: auto; min-height: auto;" aria-label="Close notification">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                `;
+
+                // Add click handler to close button
+                const closeBtn = toast.querySelector('button');
+                closeBtn.onclick = removeToast;
+
+                container.appendChild(toast);
+
+                // Trigger animation
+                setTimeout(() => toast.classList.add('toast-visible'), 10);
+
+                // Auto-remove after 5 seconds
+                autoRemoveTimeout = setTimeout(() => {
+                    toast.classList.remove('toast-visible');
+                    fadeTimeout = setTimeout(removeToast, 300);
+                }, 5000);
+            }
+        };
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--color-success)';
+                button.style.color = 'white';
+                button.style.borderColor = 'var(--color-success)';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                    button.style.color = '';
+                    button.style.borderColor = '';
+                }, 2000);
+            }).catch(() => {
+                AuroraDS.showToast('Failed to copy code', 'danger');
+            });
+        }
+
+        // Initialize theme on load
+        document.addEventListener('DOMContentLoaded', () => {
+            AuroraDS.theme.init();
+
+            // Add smooth scroll behavior for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Initialize any tooltips
+            document.querySelectorAll('.tooltip').forEach(tooltip => {
+                tooltip.setAttribute('aria-describedby', 'tooltip-' + Math.random().toString(36).substr(2, 9));
+            });
+
+            // Show welcome toast
+            setTimeout(() => {
+                AuroraDS.showToast('Welcome to Aurora Design System! 🦄', 'success');
+            }, 1000);
+        });
+
+        // Keyboard navigation enhancements
+        document.addEventListener('keydown', (e) => {
+            // Press '/' to focus search (if implemented)
+            if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                e.preventDefault();
+                const searchInput = document.querySelector('.search-input');
+                if (searchInput) searchInput.focus();
+            }
+
+            // Press 'T' to toggle theme
+            if (e.key === 't' && e.ctrlKey) {
+                e.preventDefault();
+                AuroraDS.theme.toggle();
+            }
+        });
+
+        // Performance observer for animations
+        if ('IntersectionObserver' in window) {
+            const animatedElements = document.querySelectorAll('.card, .color-swatch, .demo-interactive');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    } else {
+                        entry.target.style.animationPlayState = 'paused';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => observer.observe(el));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+# mise configuration for Aurora Design System
+# https://mise.jdx.dev/
+
+[env]
+PROJECT_NAME = "Aurora Design System"
+DEMO_PORT = "8080"
+
+# ========================================
+# Demo Tasks
+# ========================================
+
+# Serve the demo
+[tasks.demo]
+description = "Serve the Aurora Design System demo"
+run = '''
+    # Kill any existing Python http.server process on port ${DEMO_PORT}
+    ps aux | grep -E "python.*http.server.*${DEMO_PORT}" | grep -v grep | awk '{print $2}' | xargs -r kill -9 2>/dev/null || true
+    
+    echo "🎨 Starting Aurora Design System demo server..."
+    echo "📍 Open http://localhost:${DEMO_PORT}/ in your browser"
+    echo "📝 Press Ctrl+C to stop the server"
+    python3 -m http.server ${DEMO_PORT}
+'''
+
+# Open demo in browser
+[tasks."demo:open"]
+description = "Open the demo in your default browser"
+run = '''
+    # Kill any existing Python http.server process on port ${DEMO_PORT}
+    ps aux | grep -E "python.*http.server.*${DEMO_PORT}" | grep -v grep | awk '{print $2}' | xargs -r kill -9 2>/dev/null || true
+    
+    # Start server in background
+    python3 -m http.server ${DEMO_PORT} &
+    SERVER_PID=$!
+    
+    # Wait a moment for server to start
+    sleep 1
+    
+    # Open in browser (cross-platform)
+    if command -v open &> /dev/null; then
+        open "http://localhost:${DEMO_PORT}/"
+    elif command -v xdg-open &> /dev/null; then
+        xdg-open "http://localhost:${DEMO_PORT}/"
+    elif command -v start &> /dev/null; then
+        start "http://localhost:${DEMO_PORT}/"
+    else
+        echo "Please open http://localhost:${DEMO_PORT}/ in your browser"
+    fi
+    
+    # Keep server running
+    wait $SERVER_PID
+'''
+
+# Test the demo
+[tasks.test]
+description = "Run basic checks on the demo"
+run = '''
+    echo "🔍 Running Aurora Design System checks..."
+    
+    # Check if index.html exists
+    if [[ -f "index.html" ]]; then
+        echo "✅ index.html exists"
+    else
+        echo "❌ index.html not found"
+        exit 1
+    fi
+    
+    # Check HTML validity (basic check)
+    if grep -q "<!DOCTYPE html>" index.html; then
+        echo "✅ Valid HTML5 doctype"
+    else
+        echo "❌ Missing HTML5 doctype"
+        exit 1
+    fi
+    
+    # Check for AuroraDS JavaScript
+    if grep -q "window.AuroraDS" index.html; then
+        echo "✅ AuroraDS JavaScript found"
+    else
+        echo "❌ AuroraDS JavaScript not found"
+        exit 1
+    fi
+    
+    echo ""
+    echo "🎉 All checks passed! Aurora Design System is ready for deployment."
+'''
+
+# Install (placeholder for future npm packages)
+[tasks.install]
+description = "Install dependencies (currently none required)"
+run = '''
+    echo "📦 Aurora Design System is pure HTML/CSS/JS"
+    echo "✅ No dependencies to install"
+'''
+
+# Build (placeholder for future build process)
+[tasks.build]
+description = "Build the design system (currently no build required)"
+run = '''
+    echo "🔨 Aurora Design System is ready to use"
+    echo "✅ No build step required"
+'''
+
+# Lint (basic HTML validation)
+[tasks.lint]
+description = "Run basic linting checks"
+run = '''
+    echo "🔍 Running linting checks..."
+    
+    # Check for common HTML issues
+    if grep -q "console.log" index.html; then
+        echo "⚠️  Warning: console.log statements found"
+    fi
+    
+    # Check for TODO comments
+    if grep -qi "todo" index.html; then
+        echo "⚠️  Warning: TODO comments found"
+    fi
+    
+    echo "✅ Linting complete"
+'''
+
+# Clean (nothing to clean for now)
+[tasks.clean]
+description = "Clean build artifacts"
+run = '''
+    echo "🧹 Aurora Design System has no build artifacts"
+    echo "✅ Nothing to clean"
+'''
